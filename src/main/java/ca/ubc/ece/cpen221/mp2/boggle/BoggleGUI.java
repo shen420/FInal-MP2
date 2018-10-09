@@ -6,7 +6,6 @@ package ca.ubc.ece.cpen221.mp2.boggle;
  *  GUI for the boggle solver. Pits the user against a computer opponent
  *  of various difficulties. Can be launched from the command line, where 
  *  the default size of the board for that game must be specified. 
-
  *  % javac BoggleGUI.java
  *
  *  % java BoggleGUI
@@ -29,13 +28,13 @@ import java.util.TreeSet;
 
 public class BoggleGUI extends JFrame {
     private static final int GAME_TIME = 180;
-                            // in seconds
+    // in seconds
     private static final int SECONDS_PER_MINUTE = 60;
-                            // number of seconds in one minute
+    // number of seconds in one minute
     private static final int FOUND_WORDS_DISPLAY_COUNT = 17;
-                            // how many rows to display for the two side columns
+    // how many rows to display for the two side columns
     private static final int ALL_WORDS_DISPLAY_COUNT = 7;
-                            // how many rows to display for the middle all-words list
+    // how many rows to display for the middle all-words list
 
     // sizes of GUI elements, in pixels
     private static final int DEF_HEIGHT = 550;
@@ -55,10 +54,10 @@ public class BoggleGUI extends JFrame {
     // menu items will be adjusted automatically
     private static final int NUMBER_OF_LEVELS = 4;
     private static final String[] LEVEL_DESCRIPTION = {
-        "Nursery",
-        "Shakespeare",
-        "Hard",
-        "Impossible"
+            "Nursery",
+            "Shakespeare",
+            "Hard",
+            "Impossible"
     };
     private static final int NURSERY = 0;
     private static final int SHAKESPEARE = 1;
@@ -411,7 +410,8 @@ public class BoggleGUI extends JFrame {
                     try {
                         rows = Integer.parseInt(args[0]);
                         cols = rows;
-                    } catch (NumberFormatException e) {
+                    }
+                    catch (NumberFormatException e) {
                         System.err.println("Usage: java BoggleGUI "
                                 + "\nor:    java BoggleGUI [rows]"
                                 + "\nor:    java BoggleGUI [rows] [cols]");
@@ -421,7 +421,8 @@ public class BoggleGUI extends JFrame {
                     try {
                         rows = Integer.parseInt(args[0]);
                         cols = Integer.parseInt(args[1]);
-                    } catch (NumberFormatException e) {
+                    }
+                    catch (NumberFormatException e) {
                         System.err.println("Usage: java BoggleGUI "
                                 + "\nor:    java BoggleGUI [rows]"
                                 + "\nor:    java BoggleGUI [rows] [cols]");
@@ -800,7 +801,7 @@ public class BoggleGUI extends JFrame {
                                 } else if (path[j] == cur) {
                                     // if the cube clicked is in the path
                                     // check if it is the last cube or the last one in the current path
-                                    //if so un-highlight it
+                                    // if so un-highlight it
                                     if (j == path.length - 1 || path[j + 1] == -1) {
                                         cubes[cur].setBackground(new Color(146, 183, 219));
                                         path[j] = -1;
@@ -808,24 +809,25 @@ public class BoggleGUI extends JFrame {
                                     break;
                                 } else if (path[j] == -1) {
                                     // check for adjacency to the last cube in the path
-                                    // row above
-                                    if (path[j - 1] >= cur - BOARD_COLS - 1 && path[j - 1] <= cur - BOARD_COLS + 1) {
-                                        path[j] = cur;
-                                    } else if (path[j - 1] == cur - 1 || path[j - 1] == cur + 1) {
-                                        // next to (same row)
-                                        path[j] = cur;
-                                    } else if (path[j - 1] >= cur + BOARD_COLS - 1
-                                            && path[j - 1] <= cur + BOARD_COLS + 1) {
-                                        // row below
+                                    // including wraparound
+
+                                    if (path[j - 1] == (cur + 1) % NUM_OF_CUBES
+                                            || path[j - 1] == (cur + BOARD_COLS - 1) % NUM_OF_CUBES
+                                            || path[j - 1] == (cur + BOARD_COLS) % NUM_OF_CUBES
+                                            || path[j - 1] == (cur + BOARD_COLS + 1) % NUM_OF_CUBES
+                                            || path[j - 1] == (cur + (BOARD_ROWS - 1) * BOARD_COLS) % NUM_OF_CUBES
+                                            || path[j - 1] == (cur + (BOARD_ROWS - 1) * BOARD_COLS - 1) % NUM_OF_CUBES
+                                            || path[j - 1] == (cur + (BOARD_ROWS - 1) * BOARD_COLS + 1) % NUM_OF_CUBES
+                                            || path[j - 1] == (cur + (BOARD_ROWS - 1) * BOARD_COLS + BOARD_COLS - 1) % NUM_OF_CUBES) {
                                         path[j] = cur;
                                     }
-
                                     break;
                                 }
                             }
-                            highlightCubes();
                         }
+                        highlightCubes();
                     }
+
 
                     @Override
                     public void mouseEntered(MouseEvent arg0) {
