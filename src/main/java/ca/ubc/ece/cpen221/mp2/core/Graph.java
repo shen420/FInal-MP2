@@ -3,7 +3,7 @@ package ca.ubc.ece.cpen221.mp2.core;
 import java.util.List;
 
 /**
- * This Graph interface represents a <strong>directed</strong> graph.
+ * This Graph interface represents a <strong>undirected</strong> graph.
  * DO NOT MODIFY THIS FILE!
  */
 public interface Graph {
