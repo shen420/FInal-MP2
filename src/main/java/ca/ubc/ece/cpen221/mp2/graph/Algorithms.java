@@ -2,8 +2,8 @@ package ca.ubc.ece.cpen221.mp2.graph;
 
 import ca.ubc.ece.cpen221.mp2.core.Graph;
 import ca.ubc.ece.cpen221.mp2.core.Vertex;
-import java.util.List;
-import java.util.Set;
+
+import java.util.*;
 
 public class Algorithms {
 
@@ -64,8 +64,15 @@ public class Algorithms {
 	 * @return
 	 */
 	public static Set<List<Vertex>> breadthFirstSearch(Graph graph) {
-		// TODO: Implement this method
-		return null; // this should be changed
+		Set<List<Vertex>> allSearch = new HashSet<List<Vertex>>();
+		Iterator<Vertex> iterator = graph.getVertices().iterator();
+
+		while (iterator.hasNext()) {
+			Vertex v = iterator.next();
+			allSearch.add(breadthFirstFromV(v, graph));
+		}
+
+		return allSearch;
 	}
 
 	/**
@@ -78,10 +85,28 @@ public class Algorithms {
 
 	 /**
 	  * You should write the spec for this method
-		*/
-		public static int diameter(Graph graph) {
-			// TODO: Implement this method
-			return -1; // this should be changed
-		}
+	  */
+	 public static int diameter(Graph graph) {
+	 	// TODO: Implement this method
+		 return -1; // this should be changed
+	 }
 
+	 private static List<Vertex> breadthFirstFromV(Vertex v, Graph graph) {
+		 List<Vertex> search = new ArrayList<Vertex>();
+		 Queue<Vertex> queue = new LinkedList<Vertex>();
+		 queue.add(v);
+
+		 while (!queue.isEmpty()) {
+		 	Vertex tmp = queue.poll();
+		 	if (!search.contains(tmp)) {
+		 		search.add(tmp);
+				List<Vertex> neighbors = graph.getNeighbors(tmp);
+				for (int i = 0; i < neighbors.size(); i++) {
+					queue.add(neighbors.get(i));
+				}
+			}
+		 }
+
+		 return search;
+	 }
 }
