@@ -79,6 +79,7 @@ public class AdjacencyListGraph implements Graph {
     public List<Vertex> getNeighbors(Vertex v) {
         Set<Vertex> neighbors = adjacentMap.get(v);
         List<Vertex> result = new ArrayList<Vertex>(neighbors);
+        result.sort(new VertexComparator());
         return result;
     }
 

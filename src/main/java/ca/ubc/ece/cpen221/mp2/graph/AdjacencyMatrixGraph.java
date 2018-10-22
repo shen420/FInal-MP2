@@ -94,11 +94,13 @@ public class AdjacencyMatrixGraph implements Graph {
     public List<Vertex> getNeighbors(Vertex v) {
         List<Vertex> neighbors = new ArrayList<Vertex>();
         int order = identifier.get(v);
-        for (int i = 0; i <= identifier.size(); i++) {
-            if (matrixList.get(i).get(order).equals(1)) {
+        for (int i = 0; i < identifier.size(); i++) {
+            if (matrixList.get(Math.max(i, order)).get(Math.min(i, order)).equals(1)) {
                 neighbors.add(getVertexByValue(identifier, i));
             }
         }
+
+        neighbors.sort(new VertexComparator());
         return neighbors;
     }
 
