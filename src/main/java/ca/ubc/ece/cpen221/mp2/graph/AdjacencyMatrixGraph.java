@@ -49,7 +49,7 @@ public class AdjacencyMatrixGraph implements Graph {
     /**
      * Adds an undirected edge from v1 to v2.
      * Postcondition: Adds an edge connecting v1 and v2 unless v1 == v2;
-     *      adds maximum of 1 edge between two difference vertices.
+     * adds maximum of 1 edge between two difference vertices.
      *
      * @param v1 is a vertex in the graph
      * @param v2 is a vertex in the graph
@@ -86,9 +86,9 @@ public class AdjacencyMatrixGraph implements Graph {
      *
      * @param v is a vertex in the graph
      * @return a list containing each vertex w such that there is
-     *      an edge from v to w. The size of the list must be as small as possible
-     *      (No trailing null elements). This method should return a list of size 0
-     *      iff v has no downstream neighbors.
+     * an edge from v to w. The size of the list must be as small as possible
+     * (No trailing null elements). This method should return a list of size 0
+     * iff v has no downstream neighbors.
      */
     @Override
     public List<Vertex> getNeighbors(Vertex v) {
@@ -108,7 +108,7 @@ public class AdjacencyMatrixGraph implements Graph {
      * Get all vertices in the graph.
      *
      * @return a list containing all vertices in the graph,
-     *      sorted by label in non-descending order, and return a list of size 0 iff the graph has no vertices.
+     * sorted by label in non-descending order, and return a list of size 0 iff the graph has no vertices.
      */
     @Override
     public List<Vertex> getVertices() {
