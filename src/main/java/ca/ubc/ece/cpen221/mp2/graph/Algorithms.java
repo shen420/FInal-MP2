@@ -2,11 +2,10 @@ package ca.ubc.ece.cpen221.mp2.graph;
 
 import ca.ubc.ece.cpen221.mp2.core.Graph;
 import ca.ubc.ece.cpen221.mp2.core.Vertex;
-import ca.ubc.ece.cpen221.utils.In;
 
 import java.util.*;
 
-public class Algorithms<search> {
+public class Algorithms {
 
     /**
      * *********************** Algorithms ****************************
@@ -61,14 +60,6 @@ public class Algorithms<search> {
         }
 
         return -1; //not found
-    }
-
-    private static void distanceHelper(Vertex v, Vertex b, Graph graph, int level) {
-        List<Vertex> neighbors = graph.getNeighbors(v);
-
-        if (neighbors.contains(b)) {
-            level++;
-        }
     }
 
     /**
@@ -127,18 +118,18 @@ public class Algorithms<search> {
     /**
      * Precondition: graph is not empty
      * Postcondition: Returns the center of the graph, which is a vertex in the graph
-     *      with minimum eccentricity. Eccentricity of a vertex s is defined as the
-     *      maximum distance between s and any other vertex t in the graph. If a graph has
-     *      multiple unconnected components, the center of the largest connected component
-     *      is returned. If two unconnected components are the same size, then the center is
-     *      determined for the component whose vertices are added to the graph first.
-     *      If multiple vertices qualify then return the vertex that has — lexicographically —
-     *      the smallest id.
+     * with minimum eccentricity. Eccentricity of a vertex s is defined as the
+     * maximum distance between s and any other vertex t in the graph. If a graph has
+     * multiple unconnected components, the center of the largest connected component
+     * is returned. If two unconnected components are the same size, then the center is
+     * determined for the component whose vertices are added to the graph first.
+     * If multiple vertices qualify then return the vertex that has — lexicographically —
+     * the smallest id.
      */
     public static Vertex center(Graph graph) {
         Map<Vertex, Integer> eccentricityMap = new HashMap<Vertex, Integer>();
         List<Vertex> vertices = graph.getVertices();
-        List<Vertex> componentVertices = new ArrayList<Vertex>();
+        List<Vertex> componentVertices;
 
         int maxComponent = 0;
         int maxIndex = 0;
