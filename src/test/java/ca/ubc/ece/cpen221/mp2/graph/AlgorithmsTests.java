@@ -149,7 +149,7 @@ public class AlgorithmsTests {
     }
 
     @Test
-    public void testDepthFirs1() {
+    public void testDepthFirst1() {
         List<Vertex> expected = new ArrayList<Vertex>();
         List<Vertex> result = new ArrayList<Vertex>();
         Algorithms.depthFirstFromV(v1, graph2, result);
@@ -165,7 +165,7 @@ public class AlgorithmsTests {
     }
 
     @Test
-    public void testDepthFirs2() {
+    public void testDepthFirst2() {
         List<Vertex> expected = new ArrayList<Vertex>();
         List<Vertex> result = new ArrayList<Vertex>();
         Algorithms.depthFirstFromV(v4, graph2, result);
@@ -181,7 +181,7 @@ public class AlgorithmsTests {
     }
 
     @Test
-    public void testDepthFirs3() {
+    public void testDepthFirst3() {
         List<Vertex> expected = new ArrayList<Vertex>();
         List<Vertex> result = new ArrayList<Vertex>();
         Algorithms.depthFirstFromV(v7, graph1, result);
@@ -221,12 +221,21 @@ public class AlgorithmsTests {
     public void testCenter1() {
         assertEquals(v1, Algorithms.center(graph1));
         assertEquals(v1, Algorithms.center(graph2));
-        assertEquals(v7, Algorithms.center(graph3));
+        assertEquals(v3, Algorithms.center(graph3));
     }
 
     @Test
     public void testFindEccentricity1() {
         assertEquals(2, Algorithms.findEccentricity(graph3, v3));
     }
+
+//    @Test
+//    public void testBFS1() {
+//        Set<List<Vertex>>expected = new HashSet<List<Vertex>>();
+//        expected.add(new ArrayList<Vertex>());
+//        {{1, 2, 3, 8, 4, 5, 6, 7}, {2, 1, 3, 4, 5, 8, 6, 7}, {3, 1, 2, 4, 5, 8, 6, 7}, {4, 2, 3, 5, 6, 7, 1, 8}, {5, 2, 3, 4, 6, 7, 1, 8}, {6, 4, 5, 7, 8, 2, 3, 1}, {7, 4, 5, 6, 8, 2, 3, 1}, {8, 1, 6, 7, 2, 3, 4, 5}};
+//        assertEquals(expected, Algorithms.breadthFirstSearch(graph1).toArray());
+//        assertEquals(expected, Algorithms.breadthFirstSearch(graph2).toArray());
+//    }
 }
 

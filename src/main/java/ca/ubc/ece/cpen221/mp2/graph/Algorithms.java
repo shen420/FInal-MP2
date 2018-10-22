@@ -131,8 +131,8 @@ public class Algorithms<search> {
      *      maximum distance between s and any other vertex t in the graph. If a graph has
      *      multiple unconnected components, the center of the largest connected component
      *      is returned. If two unconnected components are the same size, then the center is
-     *      determined for the component which contains the vertice with the smallest lexicographic
-     *      id. If multiple vertices qualify then return the vertex that has — lexicographically —
+     *      determined for the component whose vertices are added to the graph first.
+     *      If multiple vertices qualify then return the vertex that has — lexicographically —
      *      the smallest id.
      */
     public static Vertex center(Graph graph) {
