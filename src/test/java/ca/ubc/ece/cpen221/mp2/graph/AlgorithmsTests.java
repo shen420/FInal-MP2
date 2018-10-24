@@ -4,6 +4,7 @@ import ca.ubc.ece.cpen221.mp2.core.Vertex;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import ca.ubc.ece.cpen221.mp2.core.Graph;
+
 import java.io.IOException;
 import java.util.*;
 
@@ -42,22 +43,22 @@ public class AlgorithmsTests {
         graph1.addVertex(v9);
 
 
-        graph1.addEdge(v1,v2);
-        graph1.addEdge(v1,v8);
-        graph1.addEdge(v1,v3);
-        graph1.addEdge(v2,v4);
-        graph1.addEdge(v2,v5);
-        graph1.addEdge(v2,v3);
-        graph1.addEdge(v3,v4);
-        graph1.addEdge(v3,v5);
-        graph1.addEdge(v4,v6);
-        graph1.addEdge(v4,v7);
-        graph1.addEdge(v4,v5);
-        graph1.addEdge(v5,v6);
-        graph1.addEdge(v5,v7);
-        graph1.addEdge(v6,v7);
-        graph1.addEdge(v6,v8);
-        graph1.addEdge(v7,v8);
+        graph1.addEdge(v1, v2);
+        graph1.addEdge(v1, v8);
+        graph1.addEdge(v1, v3);
+        graph1.addEdge(v2, v4);
+        graph1.addEdge(v2, v5);
+        graph1.addEdge(v2, v3);
+        graph1.addEdge(v3, v4);
+        graph1.addEdge(v3, v5);
+        graph1.addEdge(v4, v6);
+        graph1.addEdge(v4, v7);
+        graph1.addEdge(v4, v5);
+        graph1.addEdge(v5, v6);
+        graph1.addEdge(v5, v7);
+        graph1.addEdge(v6, v7);
+        graph1.addEdge(v6, v8);
+        graph1.addEdge(v7, v8);
 
         graph2.addVertex(v1);
         graph2.addVertex(v2);
@@ -70,22 +71,22 @@ public class AlgorithmsTests {
         graph2.addVertex(v9);
 
 
-        graph2.addEdge(v1,v2);
-        graph2.addEdge(v1,v8);
-        graph2.addEdge(v1,v3);
-        graph2.addEdge(v2,v4);
-        graph2.addEdge(v2,v5);
-        graph2.addEdge(v2,v3);
-        graph2.addEdge(v3,v4);
-        graph2.addEdge(v3,v5);
-        graph2.addEdge(v4,v6);
-        graph2.addEdge(v4,v7);
-        graph2.addEdge(v4,v5);
-        graph2.addEdge(v5,v6);
-        graph2.addEdge(v5,v7);
-        graph2.addEdge(v6,v7);
-        graph2.addEdge(v6,v8);
-        graph2.addEdge(v7,v8);
+        graph2.addEdge(v1, v2);
+        graph2.addEdge(v1, v8);
+        graph2.addEdge(v1, v3);
+        graph2.addEdge(v2, v4);
+        graph2.addEdge(v2, v5);
+        graph2.addEdge(v2, v3);
+        graph2.addEdge(v3, v4);
+        graph2.addEdge(v3, v5);
+        graph2.addEdge(v4, v6);
+        graph2.addEdge(v4, v7);
+        graph2.addEdge(v4, v5);
+        graph2.addEdge(v5, v6);
+        graph2.addEdge(v5, v7);
+        graph2.addEdge(v6, v7);
+        graph2.addEdge(v6, v8);
+        graph2.addEdge(v7, v8);
 
         graph3.addVertex(v1);
         graph3.addVertex(v2);
@@ -97,14 +98,16 @@ public class AlgorithmsTests {
         graph3.addVertex(v8);
         graph3.addVertex(v0);
 
-        graph3.addEdge(v1,v2);
-        graph3.addEdge(v1,v3);
-        graph3.addEdge(v3,v0);
-        graph3.addEdge(v3,v6);
-        graph3.addEdge(v3,v4);
-        graph3.addEdge(v5,v0);
-        graph3.addEdge(v5,v4);
-        graph3.addEdge(v7,v8);
+        graph3.addEdge(v1, v2);
+        graph3.addEdge(v1, v3);
+        graph3.addEdge(v3, v0);
+        graph3.addEdge(v3, v6);
+        graph3.addEdge(v3, v4);
+        graph3.addEdge(v5, v0);
+        graph3.addEdge(v5, v4);
+        graph3.addEdge(v7, v8);
+        graph3.addEdge(v8, v7);
+        graph3.addEdge(v8, v8);
 
         graph4.addVertex(v1);
         graph4.addVertex(v2);
@@ -116,14 +119,16 @@ public class AlgorithmsTests {
         graph4.addVertex(v8);
         graph4.addVertex(v0);
 
-        graph4.addEdge(v1,v2);
-        graph4.addEdge(v1,v3);
-        graph4.addEdge(v3,v0);
-        graph4.addEdge(v3,v6);
-        graph4.addEdge(v3,v4);
-        graph4.addEdge(v5,v0);
-        graph4.addEdge(v5,v4);
-        graph4.addEdge(v7,v8);
+        graph4.addEdge(v1, v2);
+        graph4.addEdge(v1, v3);
+        graph4.addEdge(v3, v0);
+        graph4.addEdge(v3, v6);
+        graph4.addEdge(v3, v4);
+        graph4.addEdge(v5, v0);
+        graph4.addEdge(v5, v4);
+        graph4.addEdge(v7, v8);
+        graph4.addEdge(v8, v7);
+        graph4.addEdge(v8, v8);
     }
 
     @Test

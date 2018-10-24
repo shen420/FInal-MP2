@@ -1,5 +1,4 @@
 package ca.ubc.ece.cpen221.mp2.graph;
-
 import ca.ubc.ece.cpen221.mp2.core.Graph;
 import ca.ubc.ece.cpen221.mp2.core.Vertex;
 import java.util.*;
@@ -47,14 +46,14 @@ public class AdjacencyMatrixGraph implements Graph {
     /**
      * Adds an undirected edge from v1 to v2.
      * Postcondition: Adds an edge connecting v1 and v2 unless v1 == v2;
-     * adds maximum of 1 edge between two difference vertices.
+     * adds maximum of 1 edge between two difference vertices and no edges between same vertex.
      *
      * @param v1 is a vertex in the graph
      * @param v2 is a vertex in the graph
      */
     @Override
     public void addEdge(Vertex v1, Vertex v2) {
-        if (edgeExists(v1, v2) == false) {
+        if (edgeExists(v1, v2) == false && !v1.equals(v2)) {
             int smallOrder = Math.min(identifier.get(v1), identifier.get(v2));
             int bigOrder = Math.max(identifier.get(v1), identifier.get(v2));
             matrixList.get(bigOrder).set(smallOrder, 1);
@@ -120,11 +119,13 @@ public class AdjacencyMatrixGraph implements Graph {
     }
 
     private Vertex getVertexByValue(Map<Vertex, Integer> map, int value) {
+        Vertex result = null;
         for (Entry<Vertex, Integer> entry : map.entrySet()) {
             if (entry.getValue() == value) {
-                return entry.getKey();
+                result = entry.getKey();
+                break;
             }
         }
-        return null;
+        return result;
     }
 }

@@ -1,5 +1,4 @@
 package ca.ubc.ece.cpen221.mp2.graph;
-
 import ca.ubc.ece.cpen221.mp2.core.Graph;
 import ca.ubc.ece.cpen221.mp2.core.Vertex;
 import java.util.*;
@@ -36,19 +35,17 @@ public class AdjacencyListGraph implements Graph {
     /**
      * Adds an undirected edge from v1 to v2.
      * Postcondition: Adds an edge connecting v1 and v2 unless v1 == v2;
-     * adds maximum of 1 edge between two difference vertices.
+     * adds maximum of 1 edge between two difference vertices and no edges between same vertex.
      *
      * @param v1 is a vertex in the graph
      * @param v2 is a vertex in the graph
      */
     @Override
     public void addEdge(Vertex v1, Vertex v2) {
-        if (v1.equals(v2)) {
-            return;
+        if (edgeExists(v1, v2) == false && !v1.equals(v2)) {
+            adjacentMap.get(v1).add(v2);
+            adjacentMap.get(v2).add(v1);
         }
-
-        adjacentMap.get(v1).add(v2);
-        adjacentMap.get(v2).add(v1);
     }
 
     /**
