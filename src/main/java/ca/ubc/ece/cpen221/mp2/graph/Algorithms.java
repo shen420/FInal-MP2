@@ -220,10 +220,6 @@ public class Algorithms {
     }
 
     public static void depthFirstFromV(Vertex v, Graph graph, List search) {
-        if (v == null) {
-            return;
-        }
-
         if (!search.contains(v)) {
             search.add(v);
             List<Vertex> neighbors = graph.getNeighbors(v);

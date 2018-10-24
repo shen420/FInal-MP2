@@ -97,7 +97,7 @@ public class AdjacencyListGraph implements Graph {
 
         Set<Vertex> vertices = new HashSet<Vertex>(adjacentMap.keySet());
         List<Vertex> allVertices = new ArrayList<Vertex>(vertices);
-        Collections.sort(allVertices, new VertexComparator());
+        allVertices.sort(new VertexComparator());
         return allVertices;
     }
 }

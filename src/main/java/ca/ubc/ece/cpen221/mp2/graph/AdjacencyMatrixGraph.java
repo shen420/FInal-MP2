@@ -115,7 +115,7 @@ public class AdjacencyMatrixGraph implements Graph {
         }
 
         List<Vertex> allVertices = new ArrayList<Vertex>(identifier.keySet());
-        Collections.sort(allVertices, new VertexComparator());
+        allVertices.sort(new VertexComparator());
         return allVertices;
     }
 
