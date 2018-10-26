@@ -981,14 +981,14 @@ public class BoggleGUI extends JFrame {
             // if (foundWord) return;
             // out of bounds, wrap around
             if (i < 0) {
-                i = BOARD_ROWS - i;
+                i = BOARD_ROWS + i;
             } else {
                 if (i > BOARD_ROWS) {
                     i = i % BOARD_ROWS;
                 }
             }
             if (j < 0) {
-                j = BOARD_COLS - j;
+                j = BOARD_COLS + j;
             } else {
                 if (j > BOARD_COLS) {
                     j = j % BOARD_COLS;
