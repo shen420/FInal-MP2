@@ -28,7 +28,7 @@ public class AdjacencyMatrixGraph implements Graph {
     }
 
     /**
-     * Adds a vertex to the graph using the adjacency matrix representation.
+     * Add a vertex to the graph using the adjacency matrix representation.
      *
      * @param v is not empty and is not already a vertex in the graph
      */
@@ -44,9 +44,8 @@ public class AdjacencyMatrixGraph implements Graph {
     }
 
     /**
-     * Adds an undirected edge from v1 to v2.
-     * Postcondition: Adds an edge connecting v1 and v2 unless v1 == v2;
-     * adds maximum of 1 edge between two difference vertices and no edges between same vertex.
+     * Add an undirected and unweighted edge connecting v1 and v2 iff v1 does not equal v2, and there are no existing
+     * edges between the two vertices.
      *
      * @param v1 is a vertex in the graph
      * @param v2 is a vertex in the graph
@@ -61,7 +60,7 @@ public class AdjacencyMatrixGraph implements Graph {
     }
 
     /**
-     * Check if there is an edge from v1 to v2.
+     * Checks if there is an edge from v1 to v2.
      *
      * @param v1 is a vertex in the graph
      * @param v2 is a vertex in the graph
@@ -79,12 +78,10 @@ public class AdjacencyMatrixGraph implements Graph {
     }
 
     /**
-     * Get an array containing all vertices adjacent to v.
+     * Obtain an array containing all vertices adjacent to v containing no trailing null elements.
      *
      * @param v is a vertex in the graph
-     * @return a list containing each vertex w such that there is
-     * an edge from v to w. The size of the list must be as small as possible
-     * (No trailing null elements). This method should return a list of size 0
+     * @return list containing each vertex w such that there is an edge from v to w, returns list of size 0
      * iff v has no downstream neighbors.
      */
     @Override
@@ -102,10 +99,10 @@ public class AdjacencyMatrixGraph implements Graph {
     }
 
     /**
-     * Get all vertices in the graph.
+     * Obtain all vertices in the graph.
      *
-     * @return a list containing all vertices in the graph,
-     * sorted by label in non-descending order, and return a list of size 0 iff the graph has no vertices.
+     * @return a list containing all vertices in the graph sorted by label in non-descending order, returns
+     * list of size 0 iff the graph has no vertices.
      */
     @Override
     public List<Vertex> getVertices() {

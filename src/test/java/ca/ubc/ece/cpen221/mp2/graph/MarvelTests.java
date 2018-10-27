@@ -46,7 +46,7 @@ public class MarvelTests {
             e.printStackTrace();
         }
 
-        System.out.println(comicToCharacter.keySet());
+        System.out.print(comicToCharacter.keySet());
         for (String key : comicToCharacter.keySet()) {
             List<String> characterSameComic = comicToCharacter.get(key);
 
