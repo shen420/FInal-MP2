@@ -22,9 +22,9 @@ public class Algorithms {
      * You should write the specs for this and all other methods.
      *
      * @param graph
-     * @param a     is in the graph
-     * @param b     is in the graph
-     * @return
+     * @param a is a vertex in the graph
+     * @param b is a vertex in the graph
+     * @return a map, returns -1 if not found
      */
     public static int shortestDistance(Graph graph, Vertex a, Vertex b) {
         int level = 0;
@@ -100,8 +100,8 @@ public class Algorithms {
      * returned set should correspond to the number of graph
      * vertices).
      *
-     * @param
-     * @return
+     * @param graph is not empty
+     * @return set of lists where each element is a list of elements ordered by a BFS starting at a specific vertex of the graph.
      */
     public static Set<List<Vertex>> breadthFirstSearch(Graph graph) {
         Set<List<Vertex>> allSearch = new HashSet<List<Vertex>>();
@@ -116,8 +116,7 @@ public class Algorithms {
     }
 
     /**
-     * Precondition: graph is not empty
-     * Postcondition: Returns the center of the graph, which is a vertex in the graph
+     * Returns the center of the graph, which is a vertex in the graph
      * with minimum eccentricity. Eccentricity of a vertex s is defined as the
      * maximum distance between s and any other vertex t in the graph. If a graph has
      * multiple unconnected components, the center of the largest connected component
@@ -125,6 +124,8 @@ public class Algorithms {
      * determined for the component whose vertices are added to the graph first.
      * If multiple vertices qualify then return the vertex that has — lexicographically —
      * the smallest id.
+     *
+     * @param graph is not empty
      */
     public static Vertex center(Graph graph) {
         Map<Vertex, Integer> eccentricityMap = new HashMap<Vertex, Integer>();
@@ -198,6 +199,18 @@ public class Algorithms {
         return diameter; //-1 if not connected
     }
 
+    /**
+     * Return a list of vertices in order starting from vertex v, followed by each subsequent vertices by order of transversing
+     * through vertices one entire level at a time, such that each level is added to the list before proceeding to the
+     * next, the process continues until all vertices reachable from vertex v are added to the list.
+     *
+     *
+     * @param v is a vertex in the graph
+     * @param graph
+     * @return a list of all vertices reachable from vertex v, sorted by transversing through each level before
+     * proceeding to the next.
+     */
+
     public static List<Vertex> breadthFirstFromV(Vertex v, Graph graph) {
         List<Vertex> search = new ArrayList<Vertex>();
         Queue<Vertex> queue = new LinkedList<Vertex>();
@@ -218,6 +231,16 @@ public class Algorithms {
 
         return search;
     }
+
+    /**
+     * Add vertices to search list starting from vertex v, followed by transversing each parent node individually
+     * until reaching the bottom of the tree before moving to the next parent node. This continues until all vertices
+     * reachable from vertex v are added to the list.
+     *
+     * @param  v is a vertex in the graph
+     * @param graph
+     * @param search is  not null
+     */
 
     public static void depthFirstFromV(Vertex v, Graph graph, List search) {
         if (!search.contains(v)) {
