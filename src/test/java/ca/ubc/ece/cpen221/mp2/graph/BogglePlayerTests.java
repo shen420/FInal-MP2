@@ -72,7 +72,6 @@ public class BogglePlayerTests {
     private static BoggleBoard board1162;
     private static BoggleBoard board2989;
 
-
     private static TreeSet<String> commonDictionary;
 
     @BeforeClass
