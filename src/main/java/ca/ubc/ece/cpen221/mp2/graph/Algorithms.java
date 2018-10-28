@@ -165,7 +165,6 @@ public class Algorithms {
      * @param graph is not empty
      * @param vertex is a vertex in the graph
      * @return eccentricity of the vertex
-     *
      */
 
     public static int findEccentricity(Graph graph, Vertex vertex) {
@@ -210,7 +209,6 @@ public class Algorithms {
      * Return a list of vertices in order starting from vertex v, followed by each subsequent vertices by order of transversing
      * through vertices one entire level at a time, such that each level is added to the list before proceeding to the
      * next, the process continues until all vertices reachable from vertex v are added to the list.
-     *
      *
      * @param v is a vertex in the graph
      * @param graph is not empty
