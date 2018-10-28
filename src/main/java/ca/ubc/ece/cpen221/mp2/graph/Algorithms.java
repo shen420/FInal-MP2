@@ -123,6 +123,7 @@ public class Algorithms {
         List<Vertex> vertices = graph.getVertices();
         List<Vertex> componentVertices;
 
+        //find the biggest component of the graph
         int maxComponent = 0;
         int maxIndex = 0;
         for (int k = 0; k < vertices.size(); k++) {

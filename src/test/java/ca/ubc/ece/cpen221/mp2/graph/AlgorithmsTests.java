@@ -464,7 +464,5 @@ public class AlgorithmsTests {
         assertEquals(2, Algorithms.findEccentricity(graph3, v3));
         assertEquals(2, Algorithms.findEccentricity(graph4, v3));
     }
-
-
 }
 
