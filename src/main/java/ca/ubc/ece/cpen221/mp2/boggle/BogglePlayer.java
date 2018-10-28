@@ -15,7 +15,7 @@ public class BogglePlayer {
     // Initializes the data type using the given set of strings as the dictionary.
     // (You can assume each word in the dictionary contains only the uppercase letters A through Z.)
     public BogglePlayer(String[] dictionary) {
-        this( new HashSet<>(Arrays.asList(dictionary)));
+        this(new HashSet<>(Arrays.asList(dictionary)));
     }
 
     // Initializes the data type using the given set of strings as the dictionary.
@@ -44,8 +44,7 @@ public class BogglePlayer {
             for (int j = 0; j < col; j++) {
                 if (board.getLetter(i, j) == 'Q') {
                     boggleGraph.addVertex(new Vertex("QU", i + " " + j));
-                }
-                else {
+                } else {
                     boggleGraph.addVertex(new Vertex(String.valueOf(board.getLetter(i, j)), i + " " + j));
                 }
             }
@@ -56,21 +55,20 @@ public class BogglePlayer {
 
                 Vertex a;
                 if (board.getLetter(i, j) == 'Q') {
-                    a = new Vertex("QU",i + " " + j);
+                    a = new Vertex("QU", i + " " + j);
 
-                }
-                else {
-                    a = new Vertex(String.valueOf(board.getLetter(i, j)),i + " " + j);
+                } else {
+                    a = new Vertex(String.valueOf(board.getLetter(i, j)), i + " " + j);
                 }
 
-                Vertex b1 = getNeighbor(i-1, j-1, board);
-                Vertex b2 = getNeighbor(i-1, j, board);
-                Vertex b3 = getNeighbor(i-1, j+1, board);
-                Vertex b4 = getNeighbor(i, j+1, board);
-                Vertex b5 = getNeighbor(i, j-1, board);
-                Vertex b6 = getNeighbor(i+1, j-1, board);
-                Vertex b7 = getNeighbor(i+1, j, board);
-                Vertex b8 = getNeighbor(i+1, j+1, board);
+                Vertex b1 = getNeighbor(i - 1, j - 1, board);
+                Vertex b2 = getNeighbor(i - 1, j, board);
+                Vertex b3 = getNeighbor(i - 1, j + 1, board);
+                Vertex b4 = getNeighbor(i, j + 1, board);
+                Vertex b5 = getNeighbor(i, j - 1, board);
+                Vertex b6 = getNeighbor(i + 1, j - 1, board);
+                Vertex b7 = getNeighbor(i + 1, j, board);
+                Vertex b8 = getNeighbor(i + 1, j + 1, board);
                 boggleGraph.addEdge(a, b1);
                 boggleGraph.addEdge(a, b2);
                 boggleGraph.addEdge(a, b3);
@@ -90,8 +88,6 @@ public class BogglePlayer {
             visited.put(vertex, false);
         }
 
-        System.out.println("BEGIN_____" + new Date());
-
         List<Vertex> allVertices1 = boggleGraph.getVertices();
         Iterator<Vertex> iterator1 = allVertices1.iterator();
         while (iterator1.hasNext()) {
@@ -99,7 +95,6 @@ public class BogglePlayer {
             depthFirstFindWords(vertex, boggleGraph, new ArrayList<>());
         }
 
-        System.out.println("END_____" + new Date());
         System.out.println(words);
         return words;
     }
@@ -108,21 +103,19 @@ public class BogglePlayer {
         visited.put(v, true);
         search.add(v);
         String str = vertexToString(search);
-        TrieNode   node = CollectionTrie.searchNode(str);
+        TrieNode node = CollectionTrie.searchNode(str);
         if (node == null) {
             search.remove(search.size() - 1);
             visited.put(v, false);
-
             return;
-        }else {
-            if (node.getEndOfWork() && str.length()>=3){
+        } else {
+            if (node.getEndOfWork() && str.length() >= 3) {
                 words.add(str);
-                System.out.println("*******************===" + str);
             }
         }
 
 
-        List<Vertex> neighbors = graph.getNeighborsBoggle(v);
+        List<Vertex> neighbors = graph.getNeighbors(v);
         for (int i = 0; i < neighbors.size(); i++) {
             if (!visited.get(neighbors.get(i))) {
                 depthFirstFindWords(neighbors.get(i), graph, search);
@@ -134,7 +127,7 @@ public class BogglePlayer {
     }
 
 
-    private Vertex getNeighbor(int i, int j, BoggleBoard board){
+    private Vertex getNeighbor(int i, int j, BoggleBoard board) {
         int row = board.rows();
         int col = board.cols();
 
@@ -142,7 +135,7 @@ public class BogglePlayer {
             i = row - 1;
         }
         if (i == row) {
-            i = 0 ;
+            i = 0;
         }
         if (j == -1) {
             j = col - 1;
@@ -152,10 +145,9 @@ public class BogglePlayer {
         }
 
         if (board.getLetter(i, j) == 'Q') {
-            return new Vertex("QU",i + " " + j);
+            return new Vertex("QU", i + " " + j);
 
-        }
-        else {
+        } else {
             return new Vertex(String.valueOf(board.getLetter(i, j)), i + " " + j);
         }
 
@@ -197,17 +189,13 @@ public class BogglePlayer {
         int score = 0;
         if (length <= 4) {
             score = 1;
-        }
-        else if (length == 5) {
+        } else if (length == 5) {
             score = 2;
-        }
-        else if (length == 6) {
+        } else if (length == 6) {
             score = 3;
-        }
-        else if (length == 7) {
+        } else if (length == 7) {
             score = 5;
-        }
-        else {
+        } else {
             score = 11;
         }
 
