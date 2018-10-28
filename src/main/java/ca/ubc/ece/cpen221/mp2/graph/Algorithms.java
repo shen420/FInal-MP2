@@ -20,8 +20,8 @@ public class Algorithms {
      * between the two vertices. Distance between a vertex and itself is 0, returns -1 if no path exists.
      *
      * @param graph is not empty
-     * @param a is a vertex in the graph
-     * @param b is a vertex in the graph
+     * @param a     is a vertex in the graph
+     * @param b     is a vertex in the graph
      * @return the shortest distance between vertex a and b, returns -1 if no path exists
      */
     public static int shortestDistance(Graph graph, Vertex a, Vertex b) {
@@ -121,11 +121,11 @@ public class Algorithms {
     public static Vertex center(Graph graph) {
         Map<Vertex, Integer> eccentricityMap = new HashMap<Vertex, Integer>();
         List<Vertex> vertices = graph.getVertices();
-        List<Vertex> maxComponentVertices=null;
+        List<Vertex> maxComponentVertices = null;
 
         //find the biggest component of the graph
         int maxComponent = 0;
-        List<Vertex>  componentVertices = null;
+        List<Vertex> componentVertices = null;
         for (int k = 0; k < vertices.size(); k++) {
             componentVertices = breadthFirstFromV(vertices.get(k), graph);
             int size = componentVertices.size();
@@ -135,10 +135,10 @@ public class Algorithms {
             }
         }
 
-       // get minimum eccentricity
+        // get minimum eccentricity
         int minEccentricity = Integer.MAX_VALUE;
         for (int i = 0; i < maxComponent; i++) {
-            Vertex v  = maxComponentVertices.get(i);
+            Vertex v = maxComponentVertices.get(i);
             int eccen = findEccentricity(graph, v);
             if (eccen < minEccentricity) {
                 minEccentricity = eccen;
@@ -162,7 +162,7 @@ public class Algorithms {
      * Calculates the eccentricity of the vertex in the graph, the maximum distance between vertex s and any
      * other vertex t in the graph
      *
-     * @param graph is not empty
+     * @param graph  is not empty
      * @param vertex is a vertex in the graph
      * @return eccentricity of the vertex
      */
@@ -208,7 +208,7 @@ public class Algorithms {
      * through vertices one entire level at a time, such that each level is added to the list before proceeding to the
      * next, the process continues until all vertices reachable from vertex v are added to the list.
      *
-     * @param v is a vertex in the graph
+     * @param v     is a vertex in the graph
      * @param graph is not empty
      * @return a list of all vertices reachable from vertex v, sorted by transversing through each level before
      * proceeding to the next.
@@ -239,8 +239,8 @@ public class Algorithms {
      * until reaching the bottom of the tree before moving to the next parent node. This continues until all vertices
      * reachable from vertex v are added to the list.
      *
-     * @param  v is a vertex in the graph
-     * @param graph is not empty
+     * @param v      is a vertex in the graph
+     * @param graph  is not empty
      * @param search is  not null
      */
     public static void depthFirstFromV(Vertex v, Graph graph, List search) {
