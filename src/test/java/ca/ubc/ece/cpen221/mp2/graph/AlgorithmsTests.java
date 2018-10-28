@@ -26,6 +26,10 @@ public class AlgorithmsTests {
     private static Graph graph4 = new AdjacencyListGraph();
     private static Graph graph5 = new AdjacencyMatrixGraph();
     private static Graph graph6 = new AdjacencyListGraph();
+    private static Graph graph7 = new AdjacencyMatrixGraph();
+    private static Graph graph8 = new AdjacencyListGraph();
+    private static Graph graph9 = new AdjacencyMatrixGraph();
+    private static Graph graph10 = new AdjacencyListGraph();
 
     @BeforeClass
     public static void setup() throws IOException {
@@ -126,6 +130,25 @@ public class AlgorithmsTests {
         graph4.addEdge(v7, v8);
         graph4.addEdge(v8, v7);
         graph4.addEdge(v8, v8);
+
+        graph7.addVertex(v8);
+        graph8.addVertex(v9);
+
+        graph9.addVertex(v1);
+        graph9.addVertex(v2);
+        graph9.addVertex(v3);
+        graph9.addVertex(v4);
+        graph9.addVertex(v5);
+        graph9.addVertex(v6);
+        graph9.addVertex(v7);
+        graph9.addVertex(v8);
+        graph9.addVertex(v9);
+
+        graph10.addVertex(v1);
+        graph10.addVertex(v2);
+        graph10.addVertex(v3);
+        graph10.addVertex(v4);
+        graph10.addVertex(v5);
     }
 
     @Test
@@ -303,129 +326,6 @@ public class AlgorithmsTests {
     }
 
     @Test
-    public void testBreadthFirst1() {
-        List<Vertex> expected = new ArrayList<Vertex>();
-        expected.add(v1);
-        expected.add(v2);
-        expected.add(v3);
-        expected.add(v8);
-        expected.add(v4);
-        expected.add(v5);
-        expected.add(v6);
-        expected.add(v7);
-        assertEquals(expected, Algorithms.breadthFirstFromV(v1, graph1));
-        assertEquals(expected, Algorithms.breadthFirstFromV(v1, graph2));
-    }
-
-    @Test
-    public void testBreadthFirst2() {
-        List<Vertex> expected = new ArrayList<Vertex>();
-        expected.add(v7);
-        expected.add(v4);
-        expected.add(v5);
-        expected.add(v6);
-        expected.add(v8);
-        expected.add(v2);
-        expected.add(v3);
-        expected.add(v1);
-        assertEquals(expected, Algorithms.breadthFirstFromV(v7, graph1));
-        assertEquals(expected, Algorithms.breadthFirstFromV(v7, graph2));
-    }
-
-    @Test
-    public void testBreadthFirst3() {
-        List<Vertex> expected = new ArrayList<Vertex>();
-        expected.add(v4);
-        expected.add(v2);
-        expected.add(v3);
-        expected.add(v5);
-        expected.add(v6);
-        expected.add(v7);
-        expected.add(v1);
-        expected.add(v8);
-        assertEquals(expected, Algorithms.breadthFirstFromV(v4, graph1));
-        assertEquals(expected, Algorithms.breadthFirstFromV(v4, graph2));
-    }
-
-    @Test
-    public void testDepthFirst1() {
-        List<Vertex> expected = new ArrayList<Vertex>();
-        List<Vertex> result = new ArrayList<Vertex>();
-        Algorithms.depthFirstFromV(v1, graph2, result);
-        expected.add(v1);
-        expected.add(v2);
-        expected.add(v3);
-        expected.add(v4);
-        expected.add(v5);
-        expected.add(v6);
-        expected.add(v7);
-        expected.add(v8);
-        assertEquals(expected, result);
-    }
-
-    @Test
-    public void testDepthFirst2() {
-        List<Vertex> expected = new ArrayList<Vertex>();
-        List<Vertex> result = new ArrayList<Vertex>();
-        Algorithms.depthFirstFromV(v4, graph2, result);
-        expected.add(v4);
-        expected.add(v2);
-        expected.add(v1);
-        expected.add(v3);
-        expected.add(v5);
-        expected.add(v6);
-        expected.add(v7);
-        expected.add(v8);
-        assertEquals(expected, result);
-    }
-
-    @Test
-    public void testDepthFirst3() {
-        List<Vertex> expected = new ArrayList<Vertex>();
-        List<Vertex> result = new ArrayList<Vertex>();
-        Algorithms.depthFirstFromV(v7, graph1, result);
-        expected.add(v7);
-        expected.add(v4);
-        expected.add(v2);
-        expected.add(v1);
-        expected.add(v3);
-        expected.add(v5);
-        expected.add(v6);
-        expected.add(v8);
-        assertEquals(expected, result);
-    }
-
-    @Test
-    public void testDepthFirst4() {
-        List<Vertex> expected = new ArrayList<Vertex>();
-        List<Vertex> result = new ArrayList<Vertex>();
-        Algorithms.depthFirstFromV(v0, graph3, result);
-        expected.add(v0);
-        expected.add(v3);
-        expected.add(v1);
-        expected.add(v2);
-        expected.add(v4);
-        expected.add(v5);
-        expected.add(v6);
-        assertEquals(expected, result);
-    }
-
-    @Test
-    public void testDepthFirst5() {
-        List<Vertex> expected = new ArrayList<Vertex>();
-        List<Vertex> result = new ArrayList<Vertex>();
-        Algorithms.depthFirstFromV(v0, graph4, result);
-        expected.add(v0);
-        expected.add(v3);
-        expected.add(v1);
-        expected.add(v2);
-        expected.add(v4);
-        expected.add(v5);
-        expected.add(v6);
-        assertEquals(expected, result);
-    }
-
-    @Test
     public void testDistance1() {
         assertEquals(2, Algorithms.shortestDistance(graph1, v6, v3));
         assertEquals(2, Algorithms.shortestDistance(graph2, v3, v6));
@@ -449,6 +349,12 @@ public class AlgorithmsTests {
         assertEquals(4, Algorithms.diameter(graph3));
         assertEquals(2, Algorithms.diameter(graph2));
         assertEquals(4, Algorithms.diameter(graph4));
+        assertEquals(-1, Algorithms.diameter(graph5));
+        assertEquals(-1, Algorithms.diameter(graph6));
+        assertEquals(0, Algorithms.diameter(graph7));
+        assertEquals(0, Algorithms.diameter(graph8));
+        assertEquals((int) Double.POSITIVE_INFINITY, Algorithms.diameter(graph9));
+        assertEquals((int) Double.POSITIVE_INFINITY, Algorithms.diameter(graph10));
     }
 
     @Test
@@ -457,12 +363,6 @@ public class AlgorithmsTests {
         assertEquals(v1, Algorithms.center(graph2));
         assertEquals(v3, Algorithms.center(graph3));
         assertEquals(v3, Algorithms.center(graph4));
-    }
-
-    @Test
-    public void testFindEccentricity1() {
-        assertEquals(2, Algorithms.findEccentricity(graph3, v3));
-        assertEquals(2, Algorithms.findEccentricity(graph4, v3));
     }
 }
 

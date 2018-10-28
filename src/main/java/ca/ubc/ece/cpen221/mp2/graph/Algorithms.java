@@ -166,7 +166,7 @@ public class Algorithms {
      * @param vertex is a vertex in the graph
      * @return eccentricity of the vertex
      */
-    public static int findEccentricity(Graph graph, Vertex vertex) {
+    private static int findEccentricity(Graph graph, Vertex vertex) {
         List<Integer> distances = new ArrayList<Integer>();
         for (int i = 0; i < graph.getVertices().size(); i++) {
             distances.add(shortestDistance(graph, vertex, graph.getVertices().get(i)));
@@ -180,14 +180,21 @@ public class Algorithms {
      * Calculates the diameter of the graph, the maximum distance among the distances between all the pairs
      * of vertices in the graph. Diameter will return a maximum finite distance. Unless all distances are
      * infinite, meaning it is not possible to get from vertex v from vertex s for all vertices, diameter
-     * will return -1.
+     * will return infinity. Diameter returns 0 if only 1 vertex in the graph, and returns -1 if the graph is empty.
      *
-     * @param graph is not empty
-     * @return diameter of the graph, returns -1 if graph is not connected
+     * @param graph is not null
+     * @return diameter of the graph, returns infinity if graph is not connected, returns 0 if only 1 vertex
+     * in the graph, returns -1 if the graph is empty
      */
     public static int diameter(Graph graph) {
         int diameter = -1;
         List<Vertex> vertices = graph.getVertices();
+        if (vertices.size() == 1) {
+            return 0;
+        }
+        if(vertices.isEmpty()) {
+            return -1;
+        }
 
         for (int i = 0; i < vertices.size(); i++) {
             for (int j = i + 1; j < vertices.size(); j++) {
@@ -200,7 +207,10 @@ public class Algorithms {
             }
         }
 
-        return diameter; //-1 if not connected
+        if(diameter == -1) {
+            return (int) Double.POSITIVE_INFINITY;
+        }
+        return diameter;
     }
 
     /**
@@ -213,7 +223,7 @@ public class Algorithms {
      * @return a list of all vertices reachable from vertex v, sorted by transversing through each level before
      * proceeding to the next.
      */
-    public static List<Vertex> breadthFirstFromV(Vertex v, Graph graph) {
+    private static List<Vertex> breadthFirstFromV(Vertex v, Graph graph) {
         List<Vertex> search = new ArrayList<Vertex>();
         Queue<Vertex> queue = new LinkedList<Vertex>();
         queue.add(v);
@@ -243,7 +253,7 @@ public class Algorithms {
      * @param graph  is not empty
      * @param search is  not null
      */
-    public static void depthFirstFromV(Vertex v, Graph graph, List search) {
+    private static void depthFirstFromV(Vertex v, Graph graph, List search) {
         if (!search.contains(v)) {
             search.add(v);
             List<Vertex> neighbors = graph.getNeighbors(v);
