@@ -16,15 +16,13 @@ public class Algorithms {
      */
 
     /**
-     * This is provided as an example to indicate that this method and
-     * other methods should be implemented here.
-     * <p>
-     * You should write the specs for this and all other methods.
+     * Calculates the shortest path between vertex a and b, the minimum number of edges needed to transverse
+     * between the two vertices. Distance between a vertex and itself is 0, returns -1 if no path exists.
      *
-     * @param graph
+     * @param graph is not empty
      * @param a is a vertex in the graph
      * @param b is a vertex in the graph
-     * @return a map, returns -1 if not found
+     * @return the shortest distance between vertex a and b, returns -1 if no path exists
      */
     public static int shortestDistance(Graph graph, Vertex a, Vertex b) {
         int level = 0;
@@ -63,17 +61,14 @@ public class Algorithms {
     }
 
     /**
-     * Perform a complete depth first search of the given
-     * graph. Start with the search at each vertex of the
-     * graph and create a list of the vertices visited.
-     * Return a set where each element of the set is a list
-     * of elements seen by starting a DFS at a specific
-     * vertex of the graph (the number of elements in the
-     * returned set should correspond to the number of graph
-     * vertices).
+     * Perform a complete depth first search of the given graph. Start with the search at each vertex of the
+     * graph and create a list of the vertices visited. Return a set where each element of the set is a list
+     * of elements seen by starting a DFS at a specific vertex of the graph (the number of elements in the
+     * returned set should correspond to the number of graph vertices).
      *
-     * @param
-     * @return
+     * @param graph is not empty
+     * @return set of lists where each element is a list of elements ordered by a DFS starting at a
+     * specific vertex of the graph.
      */
     public static Set<List<Vertex>> depthFirstSearch(Graph graph) {
         Set<List<Vertex>> allSearch = new HashSet<List<Vertex>>();
@@ -91,17 +86,14 @@ public class Algorithms {
     }
 
     /**
-     * Perform a complete breadth first search of the given
-     * graph. Start with the search at each vertex of the
-     * graph and create a list of the vertices visited.
-     * Return a set where each element of the set is a list
-     * of elements seen by starting a BFS at a specific
-     * vertex of the graph (the number of elements in the
-     * returned set should correspond to the number of graph
-     * vertices).
+     * Perform a complete breadth first search of the given graph. Start with the search at each vertex of the
+     * graph and create a list of the vertices visited. Return a set where each element of the set is a list
+     * of elements seen by starting a BFS at a specific vertex of the graph (the number of elements in the
+     * returned set should correspond to the number of graph vertices).
      *
      * @param graph is not empty
-     * @return set of lists where each element is a list of elements ordered by a BFS starting at a specific vertex of the graph.
+     * @return set of lists where each element is a list of elements ordered by a BFS starting at a
+     * specific vertex of the graph.
      */
     public static Set<List<Vertex>> breadthFirstSearch(Graph graph) {
         Set<List<Vertex>> allSearch = new HashSet<List<Vertex>>();
@@ -116,9 +108,7 @@ public class Algorithms {
     }
 
     /**
-     * Returns the center of the graph, which is a vertex in the graph
-     * with minimum eccentricity. Eccentricity of a vertex s is defined as the
-     * maximum distance between s and any other vertex t in the graph. If a graph has
+     * Finds the center of the graph, which is the vertex with minimum eccentricity. If a graph has
      * multiple unconnected components, the center of the largest connected component
      * is returned. If two unconnected components are the same size, then the center is
      * determined for the component whose vertices are added to the graph first.
@@ -126,6 +116,7 @@ public class Algorithms {
      * the smallest id.
      *
      * @param graph is not empty
+     * @return the vertex that is the center of the graph
      */
     public static Vertex center(Graph graph) {
         Map<Vertex, Integer> eccentricityMap = new HashMap<Vertex, Integer>();
@@ -167,6 +158,16 @@ public class Algorithms {
         return minVertices.get(0);
     }
 
+    /**
+     * Calculates the eccentricity of the vertex in the graph, the maximum distance between vertex s and any
+     * other vertex t in the graph
+     *
+     * @param graph is not empty
+     * @param vertex is a vertex in the graph
+     * @return eccentricity of the vertex
+     *
+     */
+
     public static int findEccentricity(Graph graph, Vertex vertex) {
         List<Integer> distances = new ArrayList<Integer>();
 
@@ -179,7 +180,13 @@ public class Algorithms {
     }
 
     /**
-     * You should write the spec for this method
+     * Calculates the diameter of the graph, the maximum distance among the distances between all the pairs
+     * of vertices in the graph. Diameter will return a maximum finite distance. Unless all distances are
+     * infinite, meaning it is not possible to get from vertex v from vertex s for all vertices, diameter
+     * will return infinity.
+     *
+     * @param graph is not empty
+     * @return diameter of the graph, returns infinity if all distances are infinite
      */
     public static int diameter(Graph graph) {
         int diameter = -1;
@@ -206,7 +213,7 @@ public class Algorithms {
      *
      *
      * @param v is a vertex in the graph
-     * @param graph
+     * @param graph is not empty
      * @return a list of all vertices reachable from vertex v, sorted by transversing through each level before
      * proceeding to the next.
      */
@@ -238,7 +245,7 @@ public class Algorithms {
      * reachable from vertex v are added to the list.
      *
      * @param  v is a vertex in the graph
-     * @param graph
+     * @param graph is not empty
      * @param search is  not null
      */
 
