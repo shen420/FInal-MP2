@@ -52,7 +52,7 @@ public class BogglePlayer {
      * and uses each die only least once)
      * <p>
      * The letter Q on the boggle board always represents the two letters: QU
-     *
+     * <p>
      * Postcondition: The board is never updated.
      *
      * @param board
@@ -122,7 +122,6 @@ public class BogglePlayer {
             depthFirstFindWords(vertex, boggleGraph, new ArrayList<>());
         }
 
-        System.out.println(words);
         return words;
     }
 
@@ -195,10 +194,10 @@ public class BogglePlayer {
      * @return the maximum possible score that can be achieved from a given board
      */
     public int getMaximumScore(BoggleBoard board) {
-        Set<String> words = getAllValidWords(board);
+        Set<String> wordSet = getAllValidWords(board);
         int sum = 0;
 
-        Iterator<String> iterator = words.iterator();
+        Iterator<String> iterator = wordSet.iterator();
         while (iterator.hasNext()) {
             String word = iterator.next();
             int score = scoreOf(word);

@@ -192,7 +192,7 @@ public class Algorithms {
         if (vertices.size() == 1) {
             return 0;
         }
-        if(vertices.isEmpty()) {
+        if (vertices.isEmpty()) {
             return -1;
         }
 
@@ -207,7 +207,7 @@ public class Algorithms {
             }
         }
 
-        if(diameter == -1) {
+        if (diameter == -1) {
             return (int) Double.POSITIVE_INFINITY;
         }
         return diameter;
