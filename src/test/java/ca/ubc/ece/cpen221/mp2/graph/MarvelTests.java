@@ -24,19 +24,30 @@ public class MarvelTests {
 
             while (sc.hasNextLine()) {
                 String[] input = sc.nextLine().split("\t");
-                if (input[0] != "" && input.length >= 2) {
-                    String character = input[0].replaceAll("^\"|\"$", "");
-                    String comic = input[1].replaceAll("^\"|\"$", "");
-                    marvelGraph.addVertex(new Vertex (character));
+                if (input.length >= 2) {
+                    String character = input[0].replaceAll("^\"|\"$", "").trim();
 
-                    if (!comicToCharacter.keySet().contains(comic)) {
-                        List <String> characterList = new ArrayList<>();
+                    String comic = input[1].replaceAll("^\"|\"$", "").trim();
+
+//                    System.out.println(character + " ===" + comic);
+                    if (character.isEmpty() || comic.isEmpty()) {
+                        continue;
+                    }
+                    Vertex v = new Vertex(character);
+                    if (!marvelGraph.getVertices().contains(v)) {
+                        marvelGraph.addVertex(v);
+                    }
+
+                    List<String>  characterList = comicToCharacter.get(comic);
+                    if (characterList == null ) {
+                        characterList = new ArrayList<>();
                         characterList.add(character);
                         comicToCharacter.put(comic, characterList);
+
+                    }else{
+                        characterList.add(character);
                     }
-                    else {
-                        comicToCharacter.get(comic).add(character);
-                    }
+
 
                 }
             }
@@ -55,12 +66,13 @@ public class MarvelTests {
         for (String key : comicToCharacter.keySet()) {
             List<String> characterSameComic = comicToCharacter.get(key);
 
-            for (int i = 0; i < characterSameComic.size(); i++) {
+
+            for (int i = 0; i < characterSameComic.size() - 1; i++) {
+
                 Vertex a = new Vertex(characterSameComic.get(i));
-                for (int j = 0; j < characterSameComic.size(); j++) {
+                for (int j = i + 1; j < characterSameComic.size(); j++) {
                     Vertex b = new Vertex(characterSameComic.get(j));
                     marvelGraph.addEdge(a, b);
-                    marvelGraph.addEdge(b, a);
                 }
             }
         }
@@ -79,62 +91,11 @@ public class MarvelTests {
 
     @Test
     public void testMarvelShortestDistance() {
-        Vertex a = new Vertex("HUMAN TORCH/JOHNNY S");
-        Vertex b = new Vertex("INVISIBLE WOMAN/SUE");
+        Vertex a = new Vertex("DOC SAMSON/DR. LEONA");
+        Vertex b = new Vertex("ROSS, GEN. THADDEUS");
         System.out.println("TOTAL HEROS == " + marvelGraph.getVertices().size());
-        System.out.println(marvelGraph.getNeighbors(a));
-        System.out.println(marvelGraph.getNeighbors(b));
+//        System.out.println(marvelGraph.getNeighbors(a));
+//        System.out.println(marvelGraph.getNeighbors(b));
         assertEquals(1, Algorithms.shortestDistance(marvelGraph,a, b));
     }
 }
-
-//public class MarvelTest {
-//    private static File file = new File ("./datasets/marvel.txt");
-//    private static Graph marvelGraph = new AdjacencyMatrixGraph();
-//    private static Map<String, List<String>> comicToCharacter = new HashMap<>();
-//    private static List<Vertex> tmp = new ArrayList<>();
-//
-//    @BeforeClass
-//    public static void setup() throws IOException {
-//
-//        try {
-//            Scanner sc = new Scanner(file);
-//
-//            while (sc.hasNextLine()) {
-//                String[] input = sc.nextLine().split("\t");
-//                if (input[0] != "") {
-//                    String character = input[0].replaceAll("^\"|\"$", "");
-//                    String movie = input[1].replaceAll("^\"|\"$", "");
-//                    marvelGraph.addVertex(new Vertex (character));
-//                    System.out.println(character + "   " + movie);
-//
-//                    if (!comicToCharacter.keySet().contains(movie)) {
-//                        List <String> chars = new ArrayList<>();
-//                        chars.add(character);
-//                        comicToCharacter.put(movie, chars);
-//                    }
-//                    else {
-//                        comicToCharacter.get(movie).add(character);
-//                    }
-//
-//                }
-//            }
-//            sc.close();
-//        }
-//        catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        }
-//
-//        for (String key : comicToCharacter.keySet()) {
-//            List<String> characterSameComic = comicToCharacter.get(key);
-//
-//            for (int i = 0; i < characterSameComic.size() - 1; i++) {
-//                Vertex a = new Vertex(characterSameComic.get(i));
-//                for (int j = i + 1; j < characterSameComic.size(); j++) {
-//                    Vertex b = new Vertex(characterSameComic.get(j));
-//                    marvelGraph.addEdge(a, b);
-//                }
-//            }
-//        }
-//        System.out.println("DONE    " + marvelGraph.getVertices().size() + "    " + comicToCharacter.size());
-//    }

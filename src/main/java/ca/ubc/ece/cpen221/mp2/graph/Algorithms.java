@@ -121,33 +121,32 @@ public class Algorithms {
     public static Vertex center(Graph graph) {
         Map<Vertex, Integer> eccentricityMap = new HashMap<Vertex, Integer>();
         List<Vertex> vertices = graph.getVertices();
-        List<Vertex> componentVertices;
+        List<Vertex> maxComponentVertices=null;
 
         //find the biggest component of the graph
         int maxComponent = 0;
-        int maxIndex = 0;
+        List<Vertex>  componentVertices = null;
         for (int k = 0; k < vertices.size(); k++) {
-            int size = breadthFirstFromV(vertices.get(k), graph).size();
+            componentVertices = breadthFirstFromV(vertices.get(k), graph);
+            int size = componentVertices.size();
             if (size > maxComponent) {
+                maxComponentVertices = componentVertices;
                 maxComponent = size;
-                maxIndex = k;
             }
         }
-        componentVertices = (breadthFirstFromV(vertices.get(maxIndex), graph));
 
-        for (int i = 0; i < componentVertices.size(); i++) {
-            eccentricityMap.put(componentVertices.get(i), findEccentricity(graph, componentVertices.get(i)));
-        }
-
+       // get minimum eccentricity
         int minEccentricity = Integer.MAX_VALUE;
-        for (int j = 0; j < componentVertices.size(); j++) {
-
-            int eccen = eccentricityMap.get(componentVertices.get(j));
+        for (int i = 0; i < maxComponent; i++) {
+            Vertex v  = maxComponentVertices.get(i);
+            int eccen = findEccentricity(graph, v);
             if (eccen < minEccentricity) {
                 minEccentricity = eccen;
             }
+            eccentricityMap.put(v, eccen);
         }
 
+        // get the smallest id vertex
         List<Vertex> minVertices = new ArrayList<Vertex>();
         for (Map.Entry<Vertex, Integer> entry : eccentricityMap.entrySet()) {
             if (entry.getValue() == minEccentricity) {
@@ -167,10 +166,8 @@ public class Algorithms {
      * @param vertex is a vertex in the graph
      * @return eccentricity of the vertex
      */
-
     public static int findEccentricity(Graph graph, Vertex vertex) {
         List<Integer> distances = new ArrayList<Integer>();
-
         for (int i = 0; i < graph.getVertices().size(); i++) {
             distances.add(shortestDistance(graph, vertex, graph.getVertices().get(i)));
         }
@@ -183,10 +180,10 @@ public class Algorithms {
      * Calculates the diameter of the graph, the maximum distance among the distances between all the pairs
      * of vertices in the graph. Diameter will return a maximum finite distance. Unless all distances are
      * infinite, meaning it is not possible to get from vertex v from vertex s for all vertices, diameter
-     * will return infinity.
+     * will return -1.
      *
      * @param graph is not empty
-     * @return diameter of the graph, returns infinity if all distances are infinite
+     * @return diameter of the graph, returns -1 if graph is not connected
      */
     public static int diameter(Graph graph) {
         int diameter = -1;
@@ -216,7 +213,6 @@ public class Algorithms {
      * @return a list of all vertices reachable from vertex v, sorted by transversing through each level before
      * proceeding to the next.
      */
-
     public static List<Vertex> breadthFirstFromV(Vertex v, Graph graph) {
         List<Vertex> search = new ArrayList<Vertex>();
         Queue<Vertex> queue = new LinkedList<Vertex>();
@@ -247,7 +243,6 @@ public class Algorithms {
      * @param graph is not empty
      * @param search is  not null
      */
-
     public static void depthFirstFromV(Vertex v, Graph graph, List search) {
         if (!search.contains(v)) {
             search.add(v);

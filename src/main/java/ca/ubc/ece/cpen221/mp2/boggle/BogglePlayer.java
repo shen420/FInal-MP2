@@ -7,19 +7,31 @@ import ca.ubc.ece.cpen221.utils.TrieNode;
 
 import java.util.*;
 
+/**
+ * This class is an application of the graph ADT on the Boggle Board
+ */
 public class BogglePlayer {
     private Set<String> words;
     private Set<String> dictionary;
+    // Tracks if Vertex has been visited or not in the graph traverse
     private HashMap<Vertex, Boolean> visited;
 
-    // Initializes the data type using the given set of strings as the dictionary.
-    // (You can assume each word in the dictionary contains only the uppercase letters A through Z.)
+    /**
+     * Constructor that creates a BogglePlayer instance using a given dictionary
+     * Precondition: each word in the dictionary contains only the uppercase letters A through Z
+     *
+     * @param dictionary a string array of words
+     */
     public BogglePlayer(String[] dictionary) {
         this(new HashSet<>(Arrays.asList(dictionary)));
     }
 
-    // Initializes the data type using the given set of strings as the dictionary.
-    // (You can assume each word in the dictionary contains only the uppercase letters A through Z.)
+    /**
+     * Constructor that creates a BogglePlayer instance with a dictionary and initializes private members
+     * Precondition: each word in the dictionary contains only the uppercase letters A through Z
+     *
+     * @param dictionary a HashSet of string representing words
+     */
     public BogglePlayer(Set<String> dictionary) {
         this.dictionary = dictionary;
         this.words = new TreeSet<>();
@@ -27,6 +39,25 @@ public class BogglePlayer {
     }
 
     // Returns the set of all valid words in the given Boggle board, as a Set.
+
+    /**
+     * Seaches all possible valid words in the Boggle board that is present in the dictionary
+     * Precondition: The board is toroidal. The leftmost column is considered adjacent to the
+     * rightmost column; the topmost row is considered adjacent to the bottommost row;
+     * the upper-left dice/tile is adjacent to the bottom-right dice with diagonal wraparound;
+     * the upper-right dice is adjacent to the bottom-left dice. Essentially, each cell or dice
+     * or cube has 8 neighbours.
+     * <p>
+     * Valid words are at least 3 letters long, composed by folllowing a sequence of adjacent dice,
+     * and uses each die only least once)
+     * <p>
+     * The letter Q on the boggle board always represents the two letters: QU
+     *
+     * Postcondition: The board is never updated.
+     *
+     * @param board
+     * @return the set of all valid words in the given Boggle board, as a Set
+     */
     public Set<String> getAllValidWords(BoggleBoard board) {
         int row = board.rows();
         int col = board.cols();
@@ -36,8 +67,6 @@ public class BogglePlayer {
             String tmpWord = stringIterator.next();
             CollectionTrie.insert(tmpWord);
         }
-
-        System.out.println("board===" + board.toString());
 
         AdjacencyListGraph boggleGraph = new AdjacencyListGraph();
         for (int i = 0; i < row; i++) {
@@ -60,7 +89,6 @@ public class BogglePlayer {
                 } else {
                     a = new Vertex(String.valueOf(board.getLetter(i, j)), i + " " + j);
                 }
-
                 Vertex b1 = getNeighbor(i - 1, j - 1, board);
                 Vertex b2 = getNeighbor(i - 1, j, board);
                 Vertex b3 = getNeighbor(i - 1, j + 1, board);
@@ -77,7 +105,6 @@ public class BogglePlayer {
                 boggleGraph.addEdge(a, b6);
                 boggleGraph.addEdge(a, b7);
                 boggleGraph.addEdge(a, b8);
-
             }
         }
 
@@ -99,7 +126,7 @@ public class BogglePlayer {
         return words;
     }
 
-    public void depthFirstFindWords(Vertex v, AdjacencyListGraph graph, List<Vertex> search) {
+    private void depthFirstFindWords(Vertex v, AdjacencyListGraph graph, List<Vertex> search) {
         visited.put(v, true);
         search.add(v);
         String str = vertexToString(search);
@@ -109,11 +136,10 @@ public class BogglePlayer {
             visited.put(v, false);
             return;
         } else {
-            if (node.getEndOfWork() && str.length() >= 3) {
+            if (node.isLeaf() && str.length() >= 3) {
                 words.add(str);
             }
         }
-
 
         List<Vertex> neighbors = graph.getNeighbors(v);
         for (int i = 0; i < neighbors.size(); i++) {
@@ -125,7 +151,6 @@ public class BogglePlayer {
         search.remove(search.size() - 1);
         visited.put(v, false);
     }
-
 
     private Vertex getNeighbor(int i, int j, BoggleBoard board) {
         int row = board.rows();
@@ -150,8 +175,6 @@ public class BogglePlayer {
         } else {
             return new Vertex(String.valueOf(board.getLetter(i, j)), i + " " + j);
         }
-
-
     }
 
     private static String vertexToString(List<Vertex> vertexList) {
@@ -162,11 +185,15 @@ public class BogglePlayer {
             Vertex tmp = iterator.next();
             builder.append(tmp.toString());
         }
-
         return builder.toString();
     }
 
-    // Returns the maximum possible score that can be achieved from a given board
+    /**
+     * Finds the sum of the scores of all valid words in the Boggle Board
+     *
+     * @param board
+     * @return the maximum possible score that can be achieved from a given board
+     */
     public int getMaximumScore(BoggleBoard board) {
         Set<String> words = getAllValidWords(board);
         int sum = 0;
@@ -177,13 +204,15 @@ public class BogglePlayer {
             int score = scoreOf(word);
             sum += score;
         }
-
-        System.out.println("======" + sum);
         return sum;
     }
 
-    // Returns the score of the given word if it is in the dictionary, zero otherwise.
-    // (You can assume the word contains only the uppercase letters A through Z.)
+    /**
+     * Calculate the score of a given word
+     *
+     * @param word
+     * @return the score of the given word if it is in the dictionary, zero otherwise
+     */
     public int scoreOf(String word) {
         int length = word.length();
         int score = 0;
@@ -198,7 +227,6 @@ public class BogglePlayer {
         } else {
             score = 11;
         }
-
         return score;
     }
 }

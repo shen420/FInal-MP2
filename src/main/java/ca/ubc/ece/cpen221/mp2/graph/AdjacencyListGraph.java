@@ -1,8 +1,6 @@
 package ca.ubc.ece.cpen221.mp2.graph;
 import ca.ubc.ece.cpen221.mp2.core.Graph;
 import ca.ubc.ece.cpen221.mp2.core.Vertex;
-
-import java.awt.desktop.SystemSleepEvent;
 import java.util.*;
 
 /******************************************************************************
@@ -14,6 +12,9 @@ import java.util.*;
 
 
 public class AdjacencyListGraph implements Graph {
+    //  Rep Invariant:
+    //
+
     private Map<Vertex, Set<Vertex>> adjacentMap;
 
     /**
@@ -31,7 +32,6 @@ public class AdjacencyListGraph implements Graph {
      */
     @Override
     public void addVertex(Vertex v) {
-
         adjacentMap.put(v, new HashSet<>());
     }
 
@@ -75,10 +75,8 @@ public class AdjacencyListGraph implements Graph {
     @Override
     public List<Vertex> getNeighbors(Vertex v) {
         Set<Vertex> neighbors = adjacentMap.get(v);
-//        System.out.println("Neighbors for " + v.getLabel() + "= " + neighbors);
         if(neighbors == null){
             return new ArrayList<>();
-
         }
         List<Vertex> result = new ArrayList<Vertex>(neighbors);
         result.sort(new VertexComparator());
